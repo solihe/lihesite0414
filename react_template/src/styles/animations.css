@@ -1,0 +1,44 @@
+/* src/styles/animations.css */
+@keyframes floatUp {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes shine {
+  0% { background-position: -100%; }
+  100% { background-position: 200%; }
+}
+
+.float-up {
+  animation: floatUp 0.8s ease-out forwards;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.shine-effect {
+  background: linear-gradient(90deg, 
+    transparent, rgba(255,215,0,0.2), transparent);
+  background-size: 200% 100%;
+  animation: shine 2s infinite;
+}
+
+.parallax-scroll {
+  transform: translateZ(0);
+  transition: transform 0.3s ease-out;
+}
+
+.tilt-effect {
+  transform: perspective(1000px);
+  transition: transform 0.3s ease-out;
+}
+
+.tilt-effect:hover {
+  transform: perspective(1000px) rotateX(2deg) rotateY(2deg);
+}
