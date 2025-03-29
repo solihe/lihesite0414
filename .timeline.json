@@ -1,3 +1,22 @@
 {
-  "timeline_index": 1
+  "timeline_index": 3,
+  "planner": {},
+  "gallery_last_file": {},
+  "timeline_status": {
+    "2": 0,
+    "3": 1
+  },
+  "preview_servers": {
+    "120d7fba-3823-46f9-bb09-58326591575d": {
+      "role": "Alex",
+      "port": 5175,
+      "subdomain": "laihe-baijiu-0wg0y-4m9uvd-91575d",
+      "server": "eaf55515-9874-4be8-95ce-e6c35d33b1dc",
+      "cmd": "cd /data/chats/4m9uvd/workspace/react_template && pnpm install && pnpm run dev",
+      "timeline_index": 2,
+      "status": "success",
+      "logs": []
+    }
+  },
+  "deploy": {}
 }
