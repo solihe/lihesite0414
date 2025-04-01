@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import EmotionalFlashCards from './EmotionalFlashCards';
 import DecorativeBorder from './ui/DecorativeBorder';
+import { TEMP_IMAGES } from '../constants/temp-images';
 
 const HeroSection = () => {
   const [showMainContent, setShowMainContent] = useState(false);
@@ -15,7 +16,7 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="relative h-screen w-full overflow-hidden group">
+    <div className="relative h-screen w-full overflow-hidden">
       {!showMainContent ? (
         <EmotionalFlashCards onComplete={handleFlashCardsComplete} />
       ) : (
@@ -23,7 +24,7 @@ const HeroSection = () => {
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat transform scale-105 transition-transform duration-1000"
             style={{
-              backgroundImage: `url(/assets/images/hero-bg.webp)`,
+              backgroundImage: `url(${TEMP_IMAGES.heroBg})`,
               transform: `translateY(${Math.min(window.scrollY * 0.2, 100)}px)`
             }}
           >
@@ -31,15 +32,23 @@ const HeroSection = () => {
           </div>
           <div className="relative flex flex-col items-center justify-center h-full px-4 text-white text-center">
             <DecorativeBorder className="p-8">
-              <h1 className="text-4xl font-serif font-bold mb-4 animate-float-up">
-                让每一刻都值得来贺
+              <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6 animate-float-up">
+                让相聚更有意义
               </h1>
-              <p className="text-xl mb-8 animate-float-up" style={{ animationDelay: '0.2s' }}>
-                中国首创印章酒冠社交白酒
+              <p className="text-xl md:text-2xl mb-4 animate-float-up" style={{ animationDelay: '0.2s' }}>
+                创造值得铭记的时刻
+              </p>
+              <p className="text-lg md:text-xl mb-8 animate-float-up" style={{ animationDelay: '0.3s' }}>
+                让故事永远流传
               </p>
             </DecorativeBorder>
-            <div className="flex flex-col gap-4 w-full max-w-xs animate-float-up" style={{ animationDelay: '0.4s' }}>
-              <button className="bg-gold hover:bg-gold-dark text-white py-4 px-8 rounded-lg text-lg font-bold transition-colors duration-300 shine-effect">
+            <div className="flex flex-col gap-4 w-full max-w-xs mt-8 animate-float-up" style={{ animationDelay: '0.4s' }}>
+              <button 
+                className="bg-gold hover:bg-gold-dark text-white py-4 px-8 rounded-lg text-lg font-bold transition-colors duration-300 shine-effect"
+                onClick={() => {
+                  document.getElementById('purchase-guide').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+              >
                 立即购买
               </button>
               <button

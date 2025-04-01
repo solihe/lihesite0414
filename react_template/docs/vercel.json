@@ -1,0 +1,6 @@
+{
+  "buildCommand": "cd react_template && npm run build",
+  "outputDirectory": "react_template/.next",
+  "devCommand": "cd react_template && npm run dev",
+  "installCommand": "cd react_template && npm install"
+} 
