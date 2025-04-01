@@ -105,13 +105,22 @@
   "preview_servers": {
     "120d7fba-3823-46f9-bb09-58326591575d": {
       "role": "Alex",
-      "port": 5175,
+      "port": 5173,
       "subdomain": "laihe-baijiu-0wg0y-4m9uvd-91575d",
       "server": "eaf55515-9874-4be8-95ce-e6c35d33b1dc",
       "cmd": "cd /data/chats/4m9uvd/workspace/react_template && pnpm install && pnpm run dev",
       "timeline_index": 2,
-      "status": "success",
-      "logs": []
+      "status": "initializing",
+      "logs": [
+        "\n",
+        "\n",
+        "> react-template@0.0.0 dev /data/chats/4m9uvd/workspace/react_template\n",
+        "> vite\n",
+        "\n",
+        "\n",
+        "  VITE v5.4.15  ready in 471 ms\n",
+        "\n"
+      ]
     }
   },
   "deploy": {}
