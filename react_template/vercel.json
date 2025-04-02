@@ -4,7 +4,6 @@
   "installCommand": "npm install",
   "outputDirectory": "dist",
   "framework": "vite",
-  "rootDirectory": "react_template",
   "rewrites": [
     {
       "source": "/(.*)",
