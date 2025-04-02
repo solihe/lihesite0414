@@ -1,12 +1,25 @@
 {
-  "buildConfig": {
-    "type": "vite",
-    "command": "npm run build",
-    "output": "react_template/dist"
+  "commands": {
+    "build": [
+      "cd react_template",
+      "npm install",
+      "npm run build"
+    ]
   },
+  "options": {
+    "node": "20"
+  },
+  "outputs": {
+    "dir": "react_template/dist",
+    "include": [
+      "**/*"
+    ]
+  },
+  "root": "react_template",
   "env": {
     "NODE_ENV": "production",
-    "PORT": "3000"
+    "PORT": "3000",
+    "VITE_APP_TITLE": "来贺白酒官网"
   },
   "routes": [
     {
@@ -14,11 +27,17 @@
     },
     {
       "src": "/assets/(.*)",
-      "dest": "/assets/$1"
+      "dest": "/assets/$1",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
     },
     {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "/index.html",
+      "headers": {
+        "cache-control": "public, max-age=0, must-revalidate"
+      }
     }
   ]
 } 
