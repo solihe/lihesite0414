@@ -1,16 +1,20 @@
 {
   "root": "react_template",
-  "build": {
-    "command": "cd react_template && npm install && npm run build",
-    "output": "react_template/dist"
+  "buildConfig": {
+    "type": "vite",
+    "command": "npm run build",
+    "output": "dist"
   },
-  "install": {
-    "command": "cd react_template && npm install"
+  "commands": {
+    "build": "cd react_template && npm install && npm run build",
+    "start": "cd react_template && npm run preview"
   },
   "env": {
     "NODE_ENV": "production",
     "PORT": "3000"
   },
+  "framework": "vite",
+  "language": "javascript",
   "routes": [
     {
       "handle": "filesystem"
