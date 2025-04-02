@@ -2,7 +2,7 @@
 
 ## 一键部署
 [![Deploy with Vercel](https://vercel.com/button.svg)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsolihe%2Flihemobilesite-new&project-name=lihemobilesite&repository-name=lihemobilesite&root-directory=react_template)
-[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/clone?url=https://github.com/solihe/lihemobilesite-new)
+[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://dash.zeabur.com/templates/clone?url=https://github.com/solihe/lihemobilesite-new)
 
 ## 项目简介
 来贺白酒官网是一个现代化的企业展示网站，采用 React + Vite 构建。
