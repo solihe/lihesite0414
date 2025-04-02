@@ -6,16 +6,20 @@
   "scripts": {
     "dev": "cd react_template && npm install && npm run dev",
     "build": "cd react_template && npm install && npm run build",
-    "preview": "cd react_template && npm run preview",
-    "install": "cd react_template && npm install"
+    "preview": "cd react_template && npm run preview"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "^4.3.1",
-    "vite": "^5.4.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.1"
+  },
   "engines": {
-    "node": ">=18.0.0"
-  }
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
+  "packageManager": "npm@10.2.4",
+  "framework": "vite"
 } 

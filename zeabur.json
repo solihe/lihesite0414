@@ -1,21 +1,15 @@
 {
-  "commands": {
-    "build": [
-      "cd react_template",
-      "npm install",
-      "npm run build"
-    ]
-  },
-  "options": {
-    "node": "20"
-  },
-  "outputs": {
-    "dir": "react_template/dist",
-    "include": [
-      "**/*"
-    ]
-  },
   "root": "react_template",
+  "framework": "vite",
+  "packageManager": "npm",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "buildOutput": "dist",
+  "nodeVersion": "20",
+  "dev": {
+    "port": 3000,
+    "command": "npm run dev"
+  },
   "env": {
     "NODE_ENV": "production",
     "PORT": "3000",
