@@ -2,9 +2,9 @@
   "root": "react_template",
   "framework": "vite",
   "packageManager": "npm",
-  "buildCommand": "npm run build",
+  "buildCommand": "cd react_template && npm install && npm run build",
   "installCommand": "npm install",
-  "buildOutput": "dist",
+  "buildOutput": "react_template/dist",
   "nodeVersion": "20",
   "dev": {
     "port": 3000,
@@ -40,8 +40,15 @@
       "write": true
     }
   },
+  "outputs": {
+    "dir": "react_template/dist",
+    "include": ["**/*"]
+  },
   "build": {
-    "command": "cd react_template && chmod -R 777 . && npm install && npm run build",
-    "output": "dist"
+    "dockerfile": {
+      "path": "./Dockerfile",
+      "target": "runtime",
+      "buildContext": "."
+    }
   }
 } 
