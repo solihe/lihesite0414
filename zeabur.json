@@ -1,18 +1,23 @@
 {
   "root": "react_template",
   "build": {
-    "command": "npm run build",
-    "output": "dist"
+    "command": "cd react_template && npm install && npm run build",
+    "output": "react_template/dist"
   },
   "install": {
-    "command": "npm install"
+    "command": "cd react_template && npm install"
   },
   "env": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "PORT": "3000"
   },
   "routes": [
     {
       "handle": "filesystem"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
     },
     {
       "src": "/(.*)",
