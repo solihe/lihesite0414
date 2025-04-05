@@ -8,6 +8,7 @@ const EmotionalFlashCards = ({ onComplete }) => {
   const [isPaused, setIsPaused] = useState(false);
   const [showExplore, setShowExplore] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
   const progressInterval = useRef(null);
 
   const transitions = {
@@ -70,20 +71,28 @@ const EmotionalFlashCards = ({ onComplete }) => {
 
   // 图片预加载
   useEffect(() => {
+    let loadedCount = 0;
+    const totalImages = flashCards.length;
+
     flashCards.forEach(card => {
       const img = new Image();
       img.src = card.image;
+      img.onload = () => {
+        loadedCount++;
+        if (loadedCount === totalImages) {
+          setImagesLoaded(true);
+          console.log('All images loaded successfully');
+        }
+      };
+      img.onerror = (err) => {
+        console.error('Error loading image:', card.image, err);
+      };
     });
   }, []);
 
   // 进度条逻辑
   useEffect(() => {
-    if (isPaused) {
-      if (progressInterval.current) {
-        clearInterval(progressInterval.current);
-      }
-      return;
-    }
+    if (isPaused || !imagesLoaded) return;
 
     setProgress(0);
     const duration = flashCards[currentCard].duration;
@@ -105,11 +114,11 @@ const EmotionalFlashCards = ({ onComplete }) => {
         clearInterval(progressInterval.current);
       }
     };
-  }, [currentCard, isPaused]);
+  }, [currentCard, isPaused, imagesLoaded]);
 
   // 自动播放逻辑
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || !imagesLoaded) return;
     
     const timer = setTimeout(() => {
       if (currentCard < flashCards.length - 1) {
@@ -121,7 +130,7 @@ const EmotionalFlashCards = ({ onComplete }) => {
     }, flashCards[currentCard].duration);
     
     return () => clearTimeout(timer);
-  }, [currentCard, isPaused, onComplete]);
+  }, [currentCard, isPaused, imagesLoaded, onComplete]);
 
   // 闪卡交互处理
   const handleCardClick = () => {
@@ -135,6 +144,14 @@ const EmotionalFlashCards = ({ onComplete }) => {
       setCurrentCard(currentCard - 1);
     }
   };
+
+  if (!imagesLoaded) {
+    return (
+      <div className="fixed inset-0 w-screen h-screen flex items-center justify-center bg-black">
+        <div className="text-white text-2xl">加载中...</div>
+      </div>
+    );
+  }
 
   return (
     <section className="fixed inset-0 w-screen h-screen overflow-hidden z-50">
@@ -159,12 +176,19 @@ const EmotionalFlashCards = ({ onComplete }) => {
             document.addEventListener('touchend', handleTouchEnd, { once: true });
           }}
         >
-          {/* 背景图片 */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${flashCards[currentCard].image})` }}
-          >
-            <div className="absolute inset-0 bg-black/30"></div>
+          {/* 背景图片容器 */}
+          <div className="absolute inset-0 flex items-center justify-center bg-black">
+            <div 
+              className="absolute inset-0 w-full h-full"
+              style={{
+                backgroundImage: `url(${flashCards[currentCard].image})`,
+                backgroundPosition: 'center',
+                backgroundSize: 'contain',
+                backgroundRepeat: 'no-repeat'
+              }}
+            >
+              <div className="absolute inset-0 bg-black/30"></div>
+            </div>
           </div>
           
           {/* 文案 */}
