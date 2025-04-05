@@ -1,7 +1,6 @@
 // src/components/EmotionalFlashCards.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { TEMP_IMAGES } from '../constants/temp-images';
 import '../styles/animations.css';
 
 const EmotionalFlashCards = ({ onComplete }) => {
@@ -11,40 +10,71 @@ const EmotionalFlashCards = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
   const progressInterval = useRef(null);
 
+  const transitions = {
+    fade: {
+      initial: { opacity: 0, filter: 'blur(8px)' },
+      animate: { opacity: 1, filter: 'blur(0px)' },
+      exit: { opacity: 0, filter: 'blur(8px)' },
+      transition: { duration: 0.8 }
+    },
+    slide: {
+      initial: { x: '100%', opacity: 0 },
+      animate: { x: 0, opacity: 1 },
+      exit: { x: '-100%', opacity: 0 },
+      transition: { duration: 0.8, ease: 'easeInOut' }
+    },
+    zoom: {
+      initial: { scale: 1.2, opacity: 0 },
+      animate: { scale: 1, opacity: 1 },
+      exit: { scale: 0.8, opacity: 0 },
+      transition: { duration: 0.8 }
+    },
+    elegantFade: {
+      initial: { opacity: 0, y: 20, filter: 'blur(4px)' },
+      animate: { opacity: 1, y: 0, filter: 'blur(0px)' },
+      exit: { opacity: 0, y: -20, filter: 'blur(4px)' },
+      transition: { duration: 1 }
+    }
+  };
+
   const flashCards = [
     {
       id: 1,
-      background: TEMP_IMAGES.awkwardDinner,
-      text: '又一场无话可说的饭局',
+      image: '/assets/images/flashcards/饭局.png',
+      text: '饭局之上，话未出口',
       duration: 3000,
-      transition: 'fade',
-      color: 'dark'
+      transition: 'fade'
     },
     {
       id: 2,
-      background: TEMP_IMAGES.forgottenGifts,
-      text: '精心准备的礼物，却分不清谁是谁',
+      image: '/assets/images/flashcards/礼物.png',
+      text: '礼物之中，心意难表',
       duration: 3000,
-      transition: 'slide',
-      color: 'cool'
+      transition: 'slide'
     },
     {
       id: 3,
-      background: TEMP_IMAGES.ritualMoment,
-      text: '每个人都希望被看见',
+      image: '/assets/images/flashcards/渴望.png',
+      text: '内心渴望，期待共鸣',
       duration: 4000,
-      transition: 'zoom',
-      color: 'warm'
+      transition: 'zoom'
     },
     {
       id: 4,
-      background: TEMP_IMAGES.joyfulMoment,
-      text: '所有精彩，值得来贺',
+      image: '/assets/images/flashcards/来贺方案.png',
+      text: '来贺之时，心意自现',
       duration: 5000,
-      transition: 'fade',
-      color: 'bright'
+      transition: 'elegantFade'
     }
   ];
+
+  // 图片预加载
+  useEffect(() => {
+    flashCards.forEach(card => {
+      const img = new Image();
+      img.src = card.image;
+    });
+  }, []);
 
   // 进度条逻辑
   useEffect(() => {
@@ -112,10 +142,7 @@ const EmotionalFlashCards = ({ onComplete }) => {
       <AnimatePresence mode="wait">
         <motion.div 
           key={flashCards[currentCard].id}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8 }}
+          {...transitions[flashCards[currentCard].transition]}
           className="relative w-full h-full"
           onClick={handleCardClick}
           onTouchStart={(e) => {
@@ -135,11 +162,9 @@ const EmotionalFlashCards = ({ onComplete }) => {
           {/* 背景图片 */}
           <div 
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${flashCards[currentCard].background})` }}
+            style={{ backgroundImage: `url(${flashCards[currentCard].image})` }}
           >
-            <div className={`absolute inset-0 bg-gradient-to-b from-black/40 to-black/70 ${
-              flashCards[currentCard].color === 'dark' ? 'opacity-70' : 'opacity-40'
-            }`}></div>
+            <div className="absolute inset-0 bg-black/30"></div>
           </div>
           
           {/* 文案 */}
