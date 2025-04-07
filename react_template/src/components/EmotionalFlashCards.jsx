@@ -42,29 +42,19 @@ const EmotionalFlashCards = ({ onComplete }) => {
     {
       id: 1,
       image: '/assets/images/flashcards/饭局.png',
-      text: '饭局之上，话未出口',
       duration: 3000,
       transition: 'fade'
     },
     {
       id: 2,
       image: '/assets/images/flashcards/礼物.png',
-      text: '礼物之中，心意难表',
       duration: 3000,
       transition: 'slide'
     },
     {
       id: 3,
       image: '/assets/images/flashcards/渴望.png',
-      text: '内心渴望，期待共鸣',
       duration: 4000,
-      transition: 'zoom'
-    },
-    {
-      id: 4,
-      image: '/assets/images/flashcards/来贺方案.png',
-      text: '来贺之时，心意自现',
-      duration: 5000,
       transition: 'elegantFade'
     }
   ];
@@ -186,23 +176,9 @@ const EmotionalFlashCards = ({ onComplete }) => {
                 backgroundSize: 'contain',
                 backgroundRepeat: 'no-repeat'
               }}
-            >
-              <div className="absolute inset-0 bg-black/30"></div>
-            </div>
+            />
           </div>
           
-          {/* 文案 */}
-          <motion.div 
-            className="absolute inset-0 flex items-center justify-center px-6 md:px-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-          >
-            <h2 className="text-3xl md:text-5xl text-white font-medium text-center max-w-3xl leading-relaxed">
-              {flashCards[currentCard].text}
-            </h2>
-          </motion.div>
-
           {/* 暂停/播放指示器 */}
           <div className={`pause-indicator ${isPaused ? 'visible' : ''}`}>
             <svg 
