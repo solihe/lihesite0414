@@ -4,13 +4,13 @@ FROM node:20-alpine as build
 WORKDIR /app
 
 # 复制 package.json 和 package-lock.json
-COPY lihe-website/package*.json ./
+COPY package*.json ./
 
 # 安装依赖
 RUN npm install
 
 # 复制源代码
-COPY lihe-website/ ./
+COPY . ./
 
 # 构建应用
 RUN npm run build
