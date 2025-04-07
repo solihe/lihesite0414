@@ -22,7 +22,7 @@ FROM nginx:alpine as runtime
 COPY --from=build /app/dist /usr/share/nginx/html
 
 # 复制 nginx 配置
-COPY lihe-website/nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
