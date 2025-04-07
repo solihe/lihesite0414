@@ -1,10 +1,10 @@
 {
-  "root": "react_template",
+  "root": "lihe-website",
   "framework": "vite",
   "packageManager": "npm",
-  "buildCommand": "cd react_template && npm install && npm run build",
+  "buildCommand": "cd lihe-website && npm install && npm run build",
   "installCommand": "npm install",
-  "buildOutput": "react_template/dist",
+  "buildOutput": "lihe-website/dist",
   "nodeVersion": "20",
   "dev": {
     "port": 3000,
@@ -41,7 +41,7 @@
     }
   },
   "outputs": {
-    "dir": "react_template/dist",
+    "dir": "lihe-website/dist",
     "include": ["**/*"]
   },
   "build": {
