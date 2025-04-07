@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "cd lihe-website && npm install && npm run dev",
-    "build": "cd lihe-website && npm install && npm run build",
-    "preview": "cd lihe-website && npm run preview"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "react": "^18.3.1",
