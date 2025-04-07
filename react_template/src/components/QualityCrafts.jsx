@@ -5,15 +5,15 @@ import DecorativeBorder from './ui/DecorativeBorder';
 const craftSections = [
   {
     title: "12987酱香工艺",
-    content: "1年生产周期，2次投料，9次蒸煮，8次发酵，7次取酒"
+    content: "一年酿造，九次蒸煮，八次发酵，七次取酒"
   },
   {
-    title: "特选原料",
-    content: "严选五谷原粮，坚持传统纯粮酿造，零添加勾兑"
+    title: "原料甄选",
+    content: "优质五谷，传统纯粮，零添加勾兑"
   },
   {
-    title: "印章酒冠制作",
-    content: "选用顶级红花梨、黑胡桃木，精工雕刻，细节考究"
+    title: "印章酒冠",
+    content: "名贵实木，精工雕刻，尊享品质"
   }
 ];
 

@@ -33,13 +33,13 @@ const HeroSection = () => {
           <div className="relative flex flex-col items-center justify-center h-full px-4 text-white text-center">
             <DecorativeBorder className="p-8">
               <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6 animate-float-up">
-                让相聚更有意义
+                所有精彩值得来贺
               </h1>
               <p className="text-xl md:text-2xl mb-4 animate-float-up" style={{ animationDelay: '0.2s' }}>
-                创造值得铭记的时刻
+                中国首个社交功能性白酒品牌
               </p>
               <p className="text-lg md:text-xl mb-8 animate-float-up" style={{ animationDelay: '0.3s' }}>
-                让故事永远流传
+                让每一次相聚都值得铭记
               </p>
             </DecorativeBorder>
             <div className="flex flex-col gap-4 w-full max-w-xs mt-8 animate-float-up" style={{ animationDelay: '0.4s' }}>

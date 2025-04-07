@@ -1,83 +1,184 @@
 // src/components/Testimonials.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import DecorativeBorder from './ui/DecorativeBorder';
 
 const Testimonials = () => {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [autoplay, setAutoplay] = useState(true);
+  const autoplayRef = useRef(null);
+  const slidesContainerRef = useRef(null);
 
   const testimonials = [
     {
       id: 1,
-      name: '张先生',
-      role: '企业高管',
-      image: '/assets/images/testimonials/business-expert.jpg',
-      content: '来贺白酒在商务场合给我带来满满信心，让社交更加自然流畅。'
+      name: '张总',
+      role: '科技公司CEO',
+      image: 'https://img1.baidu.com/it/u=1648855231,288040214&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+      content: '来贺让商务饭局不再尴尬，印章互动让气氛自然活跃。每次带客户用餐，都会用来贺开场，效果非常好。'
     },
     {
       id: 2,
-      name: '李女士',
-      role: '文化产业从业者',
-      image: '/assets/images/testimonials/connoisseur.jpg',
-      content: '优雅的包装设计和醇厚的口感，让每次品鉴都是一场文化的享受。'
+      name: '李小姐',
+      role: '新锐设计师',
+      image: 'https://img2.baidu.com/it/u=2125178044,2153429232&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+      content: '婚宴上用来贺，创意十足，朋友们都很感兴趣。红冠系列的外观设计太精美了，甚至有朋友专门收藏。'
+    },
+    {
+      id: 3,
+      name: '王先生',
+      role: '资深品酒师',
+      image: 'https://img1.baidu.com/it/u=3787335168,392234595&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+      content: '12987酱香工艺确实出色，口感层次丰富，回味悠长。印章酒冠的创意为传统白酒带来了新的体验维度。'
+    },
+    {
+      id: 4,
+      name: '赵女士',
+      role: '企业高管',
+      image: 'https://img0.baidu.com/it/u=3321605823,2304913585&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+      content: '作为公司活动的礼品，来贺的接受度很高。不仅是酒的品质，更是它带来的社交互动，让整个团队更加凝聚。'
+    },
+    {
+      id: 5,
+      name: '陈总',
+      role: '餐饮集团创始人',
+      image: 'https://img2.baidu.com/it/u=3574450105,1239732000&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+      content: '我们餐厅专门推出了来贺主题酒席，顾客反馈非常好。印章互动成为了餐厅的特色体验，带动了整体营收增长。'
     }
   ];
 
+  const visibleSlides = 3; // 同时显示的评价数量
+  const totalSlides = testimonials.length;
+
+  useEffect(() => {
+    if (autoplay) {
+      autoplayRef.current = setInterval(() => {
+        nextSlide();
+      }, 5000);
+    }
+    return () => {
+      if (autoplayRef.current) {
+        clearInterval(autoplayRef.current);
+      }
+    };
+  }, [autoplay, activeSlide]);
+
   const nextSlide = () => {
-    setActiveSlide((prev) => (prev + 1) % testimonials.length);
+    setActiveSlide((prev) => (prev + 1) % (totalSlides - visibleSlides + 1));
   };
 
   const prevSlide = () => {
-    setActiveSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setActiveSlide((prev) => (prev - 1 + (totalSlides - visibleSlides + 1)) % (totalSlides - visibleSlides + 1));
+  };
+
+  const handleMouseEnter = () => {
+    setAutoplay(false);
+  };
+
+  const handleMouseLeave = () => {
+    setAutoplay(true);
+  };
+
+  const goToSlide = (index) => {
+    setActiveSlide(index);
   };
 
   return (
-    <section className="bg-gray-50 py-16">
+    <section className="py-16 bg-gradient-to-b from-gray-50 to-gray-100">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12">用户体验</h2>
-        <div className="relative max-w-4xl mx-auto">
-          <div className="overflow-hidden">
+        <h2 className="text-3xl font-serif font-bold text-center mb-4">用户评价</h2>
+        <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+          听听他们如何评价来贺的独特体验和卓越品质
+        </p>
+        
+        <div 
+          className="relative max-w-6xl mx-auto"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <div className="overflow-hidden" ref={slidesContainerRef}>
             <div
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${activeSlide * 100}%)` }}
+              className="flex transition-transform duration-700 ease-in-out"
+              style={{ transform: `translateX(-${activeSlide * (100 / visibleSlides)}%)` }}
             >
               {testimonials.map((testimonial) => (
                 <div
                   key={testimonial.id}
-                  className="w-full flex-shrink-0 px-4"
+                  className={`w-full md:w-1/3 flex-shrink-0 px-4 transition-opacity duration-300`}
                 >
-                  <div className="bg-white rounded-lg shadow-lg p-8">
-                    <div className="flex items-center mb-6">
-                      <img
-                        src={testimonial.image}
-                        alt={testimonial.name}
-                        className="w-16 h-16 rounded-full object-cover mr-4"
-                      />
-                      <div>
-                        <h3 className="font-bold text-lg">{testimonial.name}</h3>
-                        <p className="text-gray-600">{testimonial.role}</p>
+                  <DecorativeBorder className="bg-white h-full">
+                    <div className="p-6 flex flex-col h-full">
+                      <div className="flex items-center mb-6">
+                        <div className="w-16 h-16 rounded-full overflow-hidden mr-4 border-2 border-gold">
+                          <img
+                            src={testimonial.image}
+                            alt={testimonial.name}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div>
+                          <h3 className="font-serif font-bold text-xl">{testimonial.name}</h3>
+                          <p className="text-gray-600">{testimonial.role}</p>
+                        </div>
+                      </div>
+                      <p className="text-gray-700 italic flex-grow">{testimonial.content}</p>
+                      <div className="mt-4 flex justify-end">
+                        <div className="text-gold">
+                          <svg className="w-5 h-5 inline-block" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                          <svg className="w-5 h-5 inline-block" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                          <svg className="w-5 h-5 inline-block" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                          <svg className="w-5 h-5 inline-block" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                          <svg className="w-5 h-5 inline-block" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                        </div>
                       </div>
                     </div>
-                    <p className="text-gray-700 italic">{testimonial.content}</p>
-                  </div>
+                  </DecorativeBorder>
                 </div>
               ))}
             </div>
           </div>
+          
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-5 bg-white rounded-full p-3 shadow-lg hover:bg-gray-100 z-10 transition-transform duration-300 hover:scale-110"
+            aria-label="上一个"
           >
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
+          
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-5 bg-white rounded-full p-3 shadow-lg hover:bg-gray-100 z-10 transition-transform duration-300 hover:scale-110"
+            aria-label="下一个"
           >
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
+
+          <div className="flex justify-center mt-8">
+            {Array.from({ length: totalSlides - visibleSlides + 1 }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`w-3 h-3 mx-1 rounded-full transition-colors duration-300 ${
+                  activeSlide === index ? 'bg-gold' : 'bg-gray-300'
+                }`}
+                aria-label={`跳转到第${index + 1}页`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
