@@ -4,9 +4,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "cd react_template && npm install && npm run dev",
-    "build": "cd react_template && npm install && npm run build",
-    "preview": "cd react_template && npm run preview"
+    "dev": "cd lihe-website && npm install && npm run dev",
+    "build": "cd lihe-website && npm install && npm run build",
+    "preview": "cd lihe-website && npm run preview"
   },
   "dependencies": {
     "react": "^18.3.1",
