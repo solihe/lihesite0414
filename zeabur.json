@@ -1,8 +1,8 @@
 {
   "root": ".",
-  "framework": "vite",
+  "framework": "docker",
   "packageManager": "npm",
-  "buildCommand": "npm install && npm run build",
+  "buildCommand": "docker build -t lihe-mobile .",
   "installCommand": "npm install",
   "buildOutput": "dist",
   "nodeVersion": "20",
@@ -46,6 +46,21 @@
       "path": "./Dockerfile",
       "target": "runtime",
       "buildContext": "."
+    },
+    "env": {
+      "CI": "false"
+    },
+    "command": "npm run build",
+    "output": "dist"
+  },
+  "deploy": {
+    "startCommand": "docker run -p 3000:80 lihe-mobile",
+    "config": {
+      "buildCommand": "docker build -t lihe-mobile .",
+      "installCommand": "npm install",
+      "outputDirectory": "dist",
+      "framework": "docker",
+      "nodeVersion": "18.x"
     }
   },
   "builds": [
