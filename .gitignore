@@ -50,3 +50,8 @@ pnpm-lock.yaml
 *.pyc
 __pycache__
 .next/
+
+# 项目特定忽略项
+backup_old/
+temp/
+.cursor/

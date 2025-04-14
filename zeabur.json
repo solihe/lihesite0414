@@ -1,10 +1,10 @@
 {
-  "root": "lihe-website",
+  "root": ".",
   "framework": "vite",
   "packageManager": "npm",
-  "buildCommand": "cd lihe-website && npm install && npm run build",
+  "buildCommand": "npm install && npm run build",
   "installCommand": "npm install",
-  "buildOutput": "lihe-website/dist",
+  "buildOutput": "dist",
   "nodeVersion": "20",
   "dev": {
     "port": 3000,
@@ -41,7 +41,7 @@
     }
   },
   "outputs": {
-    "dir": "lihe-website/dist",
+    "dir": "dist",
     "include": ["**/*"]
   },
   "build": {
