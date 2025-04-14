@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 
 const Hero = () => {
   const [imageError, setImageError] = useState(false);
-  const imagePath = './assets/images/hero/productmain.png';
-  const buttonImagePath = './assets/images/icons/botton-buy.png';
-  const titleImagePath = './assets/images/hero/精彩值得来贺.png';
+  
+  // 使用import.meta.url确保正确解析资源路径
+  const imagePath = new URL('../../public/assets/images/hero/productmain.png', import.meta.url).href;
+  const buttonImagePath = new URL('../../public/assets/images/icons/botton-buy.png', import.meta.url).href;
+  const titleImagePath = new URL('../../public/assets/images/hero/精彩值得来贺.png', import.meta.url).href;
 
   useEffect(() => {
     // 验证图片是否存在
@@ -17,10 +19,10 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden ">
+    <section className="relative h-screen w-full overflow-hidden bg-[#4A0404]">
       {/* Product Image Container */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="relative w-full h-full ">
+        <div className="relative w-full h-full max-w-[90%] md:max-w-[80%] lg:max-w-[70%] aspect-[3/4] mx-auto">
           {imageError ? (
             <div className="text-white text-center p-4 bg-red-500/20 rounded">
               图片加载失败: {imagePath}
@@ -47,7 +49,7 @@ const Hero = () => {
         <div className="mt-auto w-full">
           <div className="relative">
             {/* Content */}
-            <div className="relative container mx-auto px-4 pb-24">
+            <div className="relative container mx-auto px-4 pb-12">
               <div className="max-w-3xl mx-auto">
                 <div className="flex flex-col items-center">
                   {/* Title image */}
@@ -59,7 +61,7 @@ const Hero = () => {
                     />
                   </div>
                   {/* Purchase button image */}
-                  <div className="w-48 cursor-pointer transform hover:scale-105 transition-transform duration-300 -mt-5">
+                  <div className="w-48 cursor-pointer transform hover:scale-105 transition-transform duration-300">
                     <img
                       src={buttonImagePath}
                       alt="立即购买"

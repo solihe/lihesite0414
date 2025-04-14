@@ -28,10 +28,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/index.html",
-      "headers": {
-        "cache-control": "public, max-age=0, must-revalidate"
-      }
+      "dest": "/$1"
     }
   ],
   "permissions": {
@@ -50,5 +47,11 @@
       "target": "runtime",
       "buildContext": "."
     }
-  }
+  },
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@zeabur/builder-vite"
+    }
+  ]
 } 
