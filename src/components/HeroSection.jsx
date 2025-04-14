@@ -3,10 +3,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // 导入闪卡图片
-import dinnerImage from '../assets/images/flashcards/饭局.png';
-import giftImage from '../assets/images/flashcards/礼物.png';
-import desireImage from '../assets/images/flashcards/渴望.png';
-import solutionImage from '../assets/images/flashcards/来贺方案.png';
+import dinnerImage from '@/assets/images/flashcards/饭局.png';
+import giftImage from '@/assets/images/flashcards/礼物.png';
+import desireImage from '@/assets/images/flashcards/渴望.png';
+import solutionImage from '@/assets/images/flashcards/来贺方案.png';
 
 // 点击提示箭头SVG组件
 const ChevronDown = () => (

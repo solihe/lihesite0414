@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { resolve } from 'path'
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,8 +11,9 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src'),
-      'public': resolve(__dirname, 'public')
+      '@': path.resolve(__dirname, './src'),
+      'public': path.resolve(__dirname, 'public'),
+      'assets': path.resolve(__dirname, 'src/assets')
     }
   },
   build: {
@@ -20,19 +21,26 @@ export default defineConfig({
     assetsDir: 'assets',
     assetsInlineLimit: 4096,
     rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html')
+      },
       output: {
-        manualChunks: undefined,
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name.split('.')
-          let extType = info[info.length - 1]
-          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
-            extType = 'img'
+          const ext = info[info.length - 1]
+          if (/\.(png|jpe?g|gif|svg|webp|ico)$/i.test(assetInfo.name)) {
+            return `assets/images/[name]-[hash][extname]`
           }
-          return `assets/${extType}/[name]-[hash][extname]`
+          return `assets/[ext]/[name]-[hash][extname]`
         },
         chunkFileNames: 'assets/js/[name]-[hash].js',
-        entryFileNames: 'assets/js/[name]-[hash].js'
+        entryFileNames: 'assets/js/[name]-[hash].js',
       },
     },
+    manifest: true,
+  },
+  publicDir: 'public',
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'framer-motion'],
   },
 })
