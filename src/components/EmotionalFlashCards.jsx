@@ -3,6 +3,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import '../styles/animations.css';
 
+// 导入闪卡图片
+import dinnerImage from '/public/assets/images/flashcards/饭局.png';
+import giftImage from '/public/assets/images/flashcards/礼物.png';
+import desireImage from '/public/assets/images/flashcards/渴望.png';
+
 const EmotionalFlashCards = ({ onComplete }) => {
   const [currentCard, setCurrentCard] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -41,19 +46,19 @@ const EmotionalFlashCards = ({ onComplete }) => {
   const flashCards = [
     {
       id: 1,
-      image: '/assets/images/flashcards/饭局.png',
+      image: dinnerImage,
       duration: 3000,
       transition: 'fade'
     },
     {
       id: 2,
-      image: '/assets/images/flashcards/礼物.png',
+      image: giftImage,
       duration: 3000,
       transition: 'slide'
     },
     {
       id: 3,
-      image: '/assets/images/flashcards/渴望.png',
+      image: desireImage,
       duration: 4000,
       transition: 'elegantFade'
     }
