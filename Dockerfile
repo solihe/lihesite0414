@@ -1,9 +1,6 @@
 # 构建阶段
 FROM node:18-alpine as builder
 
-# 安装 git 和 git-lfs
-RUN apk add --no-cache git git-lfs
-
 WORKDIR /app
 
 # 复制 package.json 和 package-lock.json
@@ -12,11 +9,8 @@ COPY package*.json ./
 # 安装依赖
 RUN npm install
 
-# 复制源代码和资源文件
+# 直接复制所有文件，包括已经在本地检出的 LFS 文件
 COPY . .
-
-# 初始化 Git LFS 并拉取文件
-RUN git lfs install && git lfs pull
 
 # 构建应用
 RUN npm run build
