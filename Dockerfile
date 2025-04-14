@@ -6,18 +6,15 @@ WORKDIR /app
 
 # 首先只复制依赖相关文件，以利用缓存
 COPY package*.json ./
-COPY pnpm-lock.yaml ./
 
-# 使用 pnpm 安装依赖，并清理缓存
-RUN npm install -g pnpm && \
-    pnpm install --frozen-lockfile && \
-    pnpm store prune
+# 安装依赖
+RUN npm install
 
 # 复制源代码
 COPY . .
 
 # 构建应用
-RUN pnpm run build
+RUN npm run build
 
 # 生产阶段
 FROM nginx:alpine
