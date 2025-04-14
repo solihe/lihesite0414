@@ -13,9 +13,6 @@ RUN npm install
 # 复制源代码和静态资源
 COPY . .
 
-# 确保静态资源目录存在
-RUN mkdir -p /app/public/assets/images
-
 # 构建应用
 RUN npm run build
 
@@ -40,12 +37,13 @@ RUN addgroup -g 1000 appgroup && \
 # 复制 nginx 配置
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# 从构建阶段复制构建产物
+# 从构建阶段复制构建产物和静态资源
 COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/src/assets /usr/share/nginx/html/assets
 
-# 确保静态资源目录存在并设置权限
-RUN mkdir -p /usr/share/nginx/html/assets/images && \
-    chown -R appuser:appgroup /usr/share/nginx/html
+# 设置正确的权限
+RUN chown -R appuser:appgroup /usr/share/nginx/html && \
+    chmod -R 755 /usr/share/nginx/html
 
 # 切换到非 root 用户
 USER appuser
